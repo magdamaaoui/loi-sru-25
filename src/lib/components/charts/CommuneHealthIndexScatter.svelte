@@ -895,9 +895,26 @@
 		<Button variant="outline" size="sm" class="w-full active:translate-y-0" disabled={!canReset} onclick={resetChart}>
 			{$language === 'fr' ? 'Réinitialiser' : 'Reset'}
 		</Button>
+
 	</aside>
 
 	<div class="chart-column">
+		<div class="region-legend" aria-label={$language === 'fr' ? 'Filtres par région' : 'Region filters'}>
+			<div class="region-options">
+				{#each regions as region (region)}
+					<Button
+						variant="outline"
+						size="sm"
+						class={`legend-item rounded-full active:translate-y-0 max-w-full min-w-0 h-auto min-h-7 whitespace-normal text-left ${hiddenRegions.has(region) || !representedRegions.has(region) ? 'opacity-35' : 'opacity-100'}`}
+						aria-pressed={!hiddenRegions.has(region)}
+						onclick={() => toggleRegion(region)}
+					>
+						<span class="legend-swatch" style={`background:${colorForRegionName(region)}`}></span>
+						<span>{region}</span>
+					</Button>
+				{/each}
+			</div>
+		</div>
 		<div class="chart-panel" bind:this={chartPanelEl}>
 			<svg
 			viewBox={`0 0 ${width} ${height}`}
@@ -1075,24 +1092,7 @@
 			</div>
 		{/if}
 	</div>
-		<div class="region-legend" aria-label={$language === 'fr' ? 'Légende des régions' : 'Region legend'}>
-			<p class="control-label">{$language === 'fr' ? 'Régions' : 'Regions'}</p>
-			<div class="region-options">
-				{#each regions as region (region)}
-					<Button
-						variant="outline"
-						size="sm"
-						class={`legend-item rounded-full active:translate-y-0 max-w-full min-w-0 h-auto min-h-7 whitespace-normal text-left ${hiddenRegions.has(region) || !representedRegions.has(region) ? 'opacity-35' : 'opacity-100'}`}
-						aria-pressed={!hiddenRegions.has(region)}
-						onclick={() => toggleRegion(region)}
-					>
-						<span class="legend-swatch" style={`background:${colorForRegionName(region)}`}></span>
-						<span>{region}</span>
-					</Button>
-				{/each}
-			</div>
-		</div>
-	</div>
+</div>
 </div>
 
 <style>
@@ -1190,23 +1190,15 @@
 	}
 
 	.region-legend {
-		border-top: 1px solid #dadad7;
+		border-bottom: 1px solid #dadad7;
 		padding: 12px 16px;
 	}
 
 	.region-options {
 		display: flex;
 		flex-wrap: wrap;
+		justify-content: center;
 		gap: 8px;
-	}
-
-	.legend-swatch {
-		display: block;
-		flex: 0 0 auto;
-		width: 10px;
-		height: 10px;
-		border: 1px solid #dadad7;
-		border-radius: 50%;
 	}
 
 	@media (max-width: 640px) {
@@ -1219,6 +1211,15 @@
 			min-height: 2.5rem;
 			line-height: 1.15;
 		}
+	}
+
+	.legend-swatch {
+		display: block;
+		flex: 0 0 auto;
+		width: 10px;
+		height: 10px;
+		border: 1px solid #dadad7;
+		border-radius: 50%;
 	}
 
 	.brush-layer {

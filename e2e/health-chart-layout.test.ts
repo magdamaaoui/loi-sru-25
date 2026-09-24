@@ -21,9 +21,13 @@ for (const language of ['en', 'fr']) {
         const legend = page.locator('.region-legend');
         const reset = page.locator('.chart-sidebar').getByRole('button', {name: language === 'fr' ? 'Réinitialiser' : 'Reset', exact: true});
         await expect(reset).toBeDisabled();
-        const resetBox = (await reset.boundingBox())!;
         const legendBox = (await legend.boundingBox())!;
-        expect(resetBox.y + resetBox.height).toBeLessThanOrEqual(legendBox.y);
+        const chartPanelBox = (await page.locator('.chart-panel').boundingBox())!;
+        const chartColumnBox = (await page.locator('.chart-column').boundingBox())!;
+        expect(legendBox.y + legendBox.height).toBeLessThanOrEqual(chartPanelBox.y + 1);
+        expect(legendBox.x).toBeCloseTo(chartColumnBox.x, 0);
+        expect(legendBox.width).toBeCloseTo(chartColumnBox.width, 0);
+        await expect(legend.locator('.control-label')).toHaveCount(0);
         const dot = page.locator('circle[role="img"]').first();
         await expect(dot).toHaveAttribute('fill-opacity', '0.72');
         const color = await dot.getAttribute('fill');
@@ -73,10 +77,11 @@ for (const language of ['en', 'fr']) {
         for (const width of [1280, 800, 390]) {
             await page.setViewportSize({width, height: 900});
             const chartBox = (await page.locator('.chart-panel').boundingBox())!;
+            const columnBox = (await page.locator('.chart-column').boundingBox())!;
             const regionBox = (await legend.boundingBox())!;
-            expect(regionBox.y).toBeGreaterThanOrEqual(chartBox.y + chartBox.height - 1);
-            expect(regionBox.x).toBeCloseTo(chartBox.x, 0);
-            expect(regionBox.width).toBeCloseTo(chartBox.width, 0);
+            expect(regionBox.y + regionBox.height).toBeLessThanOrEqual(chartBox.y + 1);
+            expect(regionBox.x).toBeCloseTo(columnBox.x, 0);
+            expect(regionBox.width).toBeCloseTo(columnBox.width, 0);
             expect(await page.locator('.chart-sidebar .legend-item').count()).toBe(0);
             expect(await legend.evaluate(el => el.scrollWidth - el.clientWidth)).toBeLessThanOrEqual(1);
             const [first, second] = await legend.locator('button').evaluateAll(buttons => buttons.slice(0, 2).map(button => {
