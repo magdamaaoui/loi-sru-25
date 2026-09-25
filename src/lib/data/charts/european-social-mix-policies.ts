@@ -6,7 +6,7 @@ export const socialMixPolicies = [
 		description:
 			'Danish "parallel society" legislation aims to eliminate neighborhoods with over 50% non-Western residents, high unemployment, or high crime by 2030 through forced relocations, demolitions, and reducing public housing to 40%. Legislation identifies three types of areas: deprived areas, "ghettos" and "hard ghettos" (renamed in 2021 to "parallel societies" and "restructuring areas"). Key tools include demolishing or selling off parts of social housing estates, converting rental units to private ownership, and limiting new tenants who receive social benefits.',
 		differenceFromSru:
-			'Instead of focusing on bringing affordability into exclusive wealthy enclaves, the Ghetto Laws seek the opposite: to insert middle- and upper-income Danes into predominantly immigrant neighborhoods to induce social mixing and preserve Danish culture. The law has faced significant criticism and its legality is currently under review by the European Court of Justice.',
+			'Instead of focusing on bringing affordability into exclusive wealthy enclaves, the Ghetto Laws seek the opposite: to insert middle- and upper-income Danes into predominantly immigrant neighborhoods to induce social mixing and “preserve Danish culture”. The law has faced significant criticism and its legality is currently under review by the European Court of Justice.',
 		category: 'National Mandate',
 		years: '2018, 2021'
 	},
