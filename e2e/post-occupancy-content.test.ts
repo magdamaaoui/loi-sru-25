@@ -32,7 +32,7 @@ for (const language of ['en', 'fr'] as const) {
         await expect(pageShell.locator('.prose-column > .page-intro-body')).toHaveCount(3);
 
         const captions = pageShell.locator('.story-caption');
-        await expect(captions).toHaveCount(44);
+        await expect(captions).toHaveCount(48);
         await expect(captions.first()).toHaveText(content.firstCaption);
         await expect(captions.last()).toContainText(content.lastCaptionStart);
 

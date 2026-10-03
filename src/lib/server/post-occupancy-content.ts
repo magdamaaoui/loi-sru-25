@@ -157,7 +157,7 @@ function validateAndConvert(value: unknown): PostOccupancyPageContent {
 
         const captions = document.imageCaptions?.[language];
         if (!Array.isArray(captions) || captions.length !== CASE_STUDY_IMAGE_IDS.length) {
-            throw new Error(`Expected 44 ${language} post-occupancy image captions.`);
+            throw new Error(`Expected ${CASE_STUDY_IMAGE_IDS.length} ${language} post-occupancy image captions.`);
         }
         captions.forEach((candidate, index) => {
             const caption = candidate as {id?: unknown; caption?: unknown};

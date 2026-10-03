@@ -25,7 +25,7 @@ export const postOccupancyPage = defineType({
         disableActions: ['add', 'addBefore', 'addAfter', 'remove', 'duplicate', 'copy'],
       },
       of: [defineArrayMember({type: 'imageCaption'})],
-      validation: (rule) => rule.required().length(44),
+      validation: (rule) => rule.required().length(48),
     }),
     defineField({
       name: 'imageCaptionsFr',
@@ -38,7 +38,7 @@ export const postOccupancyPage = defineType({
         disableActions: ['add', 'addBefore', 'addAfter', 'remove', 'duplicate', 'copy'],
       },
       of: [defineArrayMember({type: 'imageCaption'})],
-      validation: (rule) => rule.required().length(44),
+      validation: (rule) => rule.required().length(48),
     }),
     defineField({
       name: 'projectCardsEn',

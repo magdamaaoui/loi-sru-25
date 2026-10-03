@@ -95,6 +95,7 @@
         landscape: boolean;
         caption: string;
         objectPosition?: string;
+        documentation?: boolean;
     };
 
     type StoryProject = {
@@ -393,24 +394,58 @@
             id: "tour-bois-le-pretre",
             label: "Tour Bois-le-Prêtre",
             images: [
-                "7685ce4e-bef7-419c-8d9e-68536a49e292",
-                "cd3ed7fa-1ded-4c80-b2a8-21da3751b6d1",
-                "laguiole-280",
-                "laguiole-291",
-                "laguiole-297",
-            ].map((id, i) => ({
-                id: id as CaseStudyImageId,
-                src: `/images/optimized/project-4/${id}-full.webp`,
-                alt: "Tour Bois-le-Prêtre",
-                landscape: landscapeImageIds.has(id),
-                caption: [
-                    "In her bright, expanded kitchen at Tour Bois‑le‑Prêtre, a resident enjoys the extra space and light created by the tower’s renovation, which wrapped formerly cramped units with new winter‑garden additions.",
-                    "Behind the polycarbonate winter garden that now wraps every renovated unit, a resident’s painting studio shares the balcony with panoramic views of Paris, including the Eiffel Tower.",
-                    "In the generous winter‑garden extension added to every flat, a resident has turned her extra square meters into a light‑filled art studio, yoga studio, and dining space overlooking the city.",
-                    "In a space that once made residents dizzy during construction, when the old façade was removed and the new surface suddenly projected high above the ground, a tenant now calmly uses her expanded winter‑garden living room, enjoying a new lease on everyday life and doing far more from the comfort of her building.",
-                    "From her renovated flat, a resident draws back a specially designed curtain whose dense, pleated fabric improves thermal comfort while revealing a panoramic view over the périphérique and La Défense.",
-                ][i],
-            })),
+                ...[
+                    "7685ce4e-bef7-419c-8d9e-68536a49e292",
+                    "cd3ed7fa-1ded-4c80-b2a8-21da3751b6d1",
+                    "laguiole-280",
+                    "laguiole-291",
+                    "laguiole-297",
+                ].map((id, i) => ({
+                    id: id as CaseStudyImageId,
+                    src: `/images/optimized/project-4/${id}-full.webp`,
+                    alt: "Tour Bois-le-Prêtre",
+                    landscape: landscapeImageIds.has(id),
+                    caption: [
+                        "In her bright, expanded kitchen at Tour Bois‑le‑Prêtre, a resident enjoys the extra space and light created by the tower’s renovation, which wrapped formerly cramped units with new winter‑garden additions.",
+                        "Behind the polycarbonate winter garden that now wraps every renovated unit, a resident’s painting studio shares the balcony with panoramic views of Paris, including the Eiffel Tower.",
+                        "In the generous winter‑garden extension added to every flat, a resident has turned her extra square meters into a light‑filled art studio, yoga studio, and dining space overlooking the city.",
+                        "In a space that once made residents dizzy during construction, when the old façade was removed and the new surface suddenly projected high above the ground, a tenant now calmly uses her expanded winter‑garden living room, enjoying a new lease on everyday life and doing far more from the comfort of her building.",
+                        "From her renovated flat, a resident draws back a specially designed curtain whose dense, pleated fabric improves thermal comfort while revealing a panoramic view over the périphérique and La Défense.",
+                    ][i],
+                })),
+                {
+                    documentation: true,
+                    id: 'tour-bois-le-pretre-plan-01',
+                    src: '/images/optimized/project-4/tour-bois-le-pretre-plan-01-full.webp',
+                    alt: "Transformation strategy for Tour Bois-le-Prêtre: opening the existing façade and extending the living space with a winter garden and balcony.",
+                    landscape: false,
+                    caption: "Transformation strategy for Tour Bois-le-Prêtre: opening the existing façade and extending the living space with a winter garden and balcony.",
+                },
+                {
+                    documentation: true,
+                    id: 'tour-bois-le-pretre-plan-02',
+                    src: '/images/optimized/project-4/tour-bois-le-pretre-plan-02-full.webp',
+                    alt: "Façade detail showing the winter garden, sliding glass frames, lightweight partitions, and solar curtain.",
+                    landscape: false,
+                    caption: "Façade detail showing the winter garden, sliding glass frames, lightweight partitions, and solar curtain.",
+                },
+                {
+                    documentation: true,
+                    id: 'tour-bois-le-pretre-plan-03',
+                    src: '/images/optimized/project-4/tour-bois-le-pretre-plan-03-full.webp',
+                    alt: "Comparison of the original and current site conditions, showing the building extension, new entrances, parking, and landscape improvements.",
+                    landscape: false,
+                    caption: "Comparison of the original and current site conditions, showing the building extension, new entrances, parking, and landscape improvements.",
+                },
+                {
+                    documentation: true,
+                    id: 'tour-bois-le-pretre-plan-04',
+                    src: '/images/optimized/project-4/tour-bois-le-pretre-plan-04-full.webp',
+                    alt: "Floor plans comparing the original apartments with the transformed layouts, including expanded living areas and winter gardens.",
+                    landscape: false,
+                    caption: "Floor plans comparing the original apartments with the transformed layouts, including expanded living areas and winter gardens.",
+                },
+            ],
         },
     ];
 
@@ -628,6 +663,7 @@
                 const localizedImage = {
                     ...image,
                     caption: data.content.imageCaptions[$language][image.id],
+                    alt: image.documentation ? data.content.imageCaptions[$language][image.id] : image.alt,
                 };
                 return {
                     image: localizedImage,
@@ -1052,6 +1088,7 @@
                             bind:this={storyCardEls[frameIndex]}
                             data-frame={frameIndex}
                             data-project={frame.projectLabel}
+                            class:story-card--documentation={frame.image.documentation}
                             class:story-card--landscape={frame.image.landscape}
                             class:story-card--last={frameIndex === storyFrames.length - 1}
                             class:story-card--retired={frameIndex < activeFrame - 2}
@@ -1459,11 +1496,13 @@
         object-fit: cover;
     }
 
+    .story-card--documentation,
     .story-card--last {
         flex-direction: column;
         background: #fff;
     }
 
+    .story-card--documentation .story-image,
     .story-card--last .story-image {
         order: 2;
         flex: 1 1 0;
@@ -1473,6 +1512,7 @@
         object-fit: contain;
     }
 
+    .story-card--documentation .story-caption,
     .story-card--last .story-caption {
         position: relative;
         order: 1;
