@@ -1,0 +1,19 @@
+{
+  "name": "@dashboards/ui",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "exports": {
+    "./navigation/*": "./src/navigation/*",
+    "./styles/*": "./src/styles/*",
+    "./logos/*": "./src/logos/*",
+    "./gallery/*": "./src/gallery/*"
+  },
+  "peerDependencies": {
+    "svelte": "^5.49.2"
+  },
+  "dependencies": {
+    "@lucide/svelte": "^1.6.0",
+    "@sanity-labs/logo-soup": "^1.2.2"
+  }
+}

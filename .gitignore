@@ -5,8 +5,8 @@ node_modules
 .vercel
 .netlify
 .wrangler
-/.svelte-kit
-/build
+.svelte-kit
+build
 
 # OS
 .DS_Store
@@ -30,3 +30,7 @@ __pycache__/
 
 # Generated Sanity import files and exports
 .sanity-import/
+
+# Local browser verification
+/output/
+/.playwright-cli/

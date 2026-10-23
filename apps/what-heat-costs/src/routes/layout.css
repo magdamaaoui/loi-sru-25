@@ -1,0 +1,39 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@dashboards/ui/styles/dashboard.css";
+
+@source "../../../../packages/dashboard-ui/src";
+
+:root {
+    --dashboard-accent: #54589c;
+    --dashboard-accent-hover: #444880;
+    --dashboard-control-radius: 0;
+    --dashboard-logo-radius: 0;
+    --radius: 0;
+    --primary: var(--dashboard-accent);
+    --ring: var(--dashboard-accent);
+}
+
+::selection {
+    background: var(--dashboard-accent);
+    color: white;
+}
+
+nav.bg-white a[aria-current="page"],
+#mobile-site-menu a[aria-current="page"] {
+    border-color: var(--dashboard-accent);
+    color: var(--dashboard-accent);
+    background: transparent;
+}
+
+nav.bg-white a:hover,
+#mobile-site-menu a:hover,
+nav.bg-white button[aria-controls="mobile-site-menu"] {
+    border-color: var(--dashboard-accent);
+    color: var(--dashboard-accent);
+}
+
+:focus-visible {
+    outline: 2px solid var(--dashboard-accent);
+    outline-offset: 3px;
+}
