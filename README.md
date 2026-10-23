@@ -61,7 +61,17 @@ For two Cloudflare Pages projects, both install from the repository root using t
 
 If changing SRU to `build:sru`, update its output directory at the same time. Give each Pages project its own domain. Watch its own `apps/<app>/*` directory, `packages/*`, and root build inputs such as `package.json`, `package-lock.json`, `.npmrc`, `.nvmrc`, and `scripts/*`. Code in a shared package must trigger both builds.
 
-This scaffold does not create hosting projects, change domains, or configure content-publishing webhooks. Cloudflare settings and the new heat domain still need to be configured when ready to deploy.
+What Heat Costs has its own Cloudflare Pages project, `what-heat-costs`, in the same **Loi SRU 25** account as SRU (`e7ac77deafbc24aced36bb508b513b05`). Its address is https://what-heat-costs.pages.dev. It is connected to `magdamaaoui/loi-sru-25`, with production branch `codex/what-heat-costs`, build command `npm run build:heat`, output directory `apps/what-heat-costs/build`, and Node.js `24.5.0`. Pushes affecting the heat app, shared packages, or root dependency files rebuild this project. Preview builds are disabled for the heat project.
+
+SRU continues deploying `main`. When the dashboard branch is merged, change the heat project's production branch to `main` as well. No heat content-publishing webhook or custom domain is configured yet.
+
+To deploy the current heat build from the CLI, after `npx wrangler login`:
+
+```sh
+npm run check:heat
+npm run build:heat
+CLOUDFLARE_ACCOUNT_ID=e7ac77deafbc24aced36bb508b513b05 npx wrangler pages deploy apps/what-heat-costs/build --project-name what-heat-costs --branch codex/what-heat-costs
+```
 
 ## Content editor
 
