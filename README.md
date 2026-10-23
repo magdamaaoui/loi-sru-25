@@ -48,7 +48,7 @@ Preview SRU with `npm run preview` (port 4173) and heat with `npm run preview:he
 
 ## Production deployments
 
-Both dashboards deploy from **`main` in `magdamaaoui/loi-sru-25`**. They are separate Cloudflare Pages projects within the **Loi SRU 25** account, using the repository root and one root npm lockfile.
+Both dashboards deploy from **`main` in `magdamaaoui/loi-sru-25`**. They are separate Cloudflare Pages projects within the **mm-dashboards** account, using the repository root and one root npm lockfile.
 
 | Setting | SRU | What Heat Costs |
 | --- | --- | --- |
