@@ -1,0 +1,18 @@
+{
+  "account_id": "e7ac77deafbc24aced36bb508b513b05",
+  "repository": "magdamaaoui/loi-sru-25",
+  "production_branch": "main",
+  "shared_paths": ["packages/*", "package.json", "package-lock.json", ".npmrc", ".nvmrc", "deployment/*", "scripts/configure-cloudflare-pages.mjs"],
+  "projects": {
+    "loi-sru-25": {
+      "app_path": "apps/loi-sru/*",
+      "build_command": "npm run check:sru && npm run build:sru",
+      "destination_dir": "apps/loi-sru/build"
+    },
+    "what-heat-costs": {
+      "app_path": "apps/what-heat-costs/*",
+      "build_command": "npm run check:heat && npm run build:heat",
+      "destination_dir": "apps/what-heat-costs/build"
+    }
+  }
+}
